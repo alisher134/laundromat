@@ -1,0 +1,42 @@
+# Laundromat - Self-Service Laundry in Athens, Greece
+
+> Laundromat is a modern self-service laundry located in Athens, Greece.
+> We offer fast, easy, and affordable laundry solutions with state-of-the-art equipment.
+
+## About
+
+Laundromat provides self-service laundry facilities in multiple locations across Athens.
+Our services include washing, drying, and special cleaning for all types of fabrics.
+
+## Services
+
+- Self-Service Laundry
+- Wash and Dry
+- Special Cleaning (blankets, duvets, curtains)
+- Express Service
+
+## Locations
+
+- **Athens Center**: Ioulianou 50, Athens 104 34
+- **Glyfada**: Grigoriou Lampraki 56, Glyfada 166 75
+- **Marousi**: Kifisias Avenue 120, Marousi 151 25
+
+## Contact
+
+- Website: https://laundromat.gr
+- Email: info@laundromat.gr
+- Phone: +88006001441
+- Facebook: https://www.facebook.com/laundromatgr
+
+## Hours
+
+Open daily: 07:00 - 00:00
+
+## Useful Links
+
+- [Home](https://laundromat.gr)
+- [Services](https://laundromat.gr/services)
+- [Locations](https://laundromat.gr/locations)
+- [Tips](https://laundromat.gr/tips)
+- [Contact](https://laundromat.gr/contact)
+- [FAQ](https://laundromat.gr/faq)
