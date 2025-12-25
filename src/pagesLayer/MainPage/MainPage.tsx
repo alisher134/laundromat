@@ -11,12 +11,11 @@ import { Preloader } from '@/shared/ui/pre-loader';
 import { ContentWrapper } from '@/shared/ui/content-wrapper';
 import { useState } from 'react';
 import { cn } from '@/shared/libs/cn';
-import { useScrollSnap } from '@/shared/hooks/useScrollSnap';
 
 export const MainPage = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  useScrollSnap({ enabled: isLoaded });
+  // useScrollSnap({ enabled: isLoaded });
 
   return (
     <>
