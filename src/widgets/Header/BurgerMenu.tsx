@@ -46,7 +46,7 @@ export const BurgerMenu = ({ isMainPage }: { isMainPage?: boolean }) => {
           </div>
         </div>
 
-        <div className="flex flex-1 flex-col justify-between overflow-y-auto px-6 py-8">
+        <div className="flex flex-1 flex-col justify-between overflow-y-auto px-4 pb-6">
           <nav aria-label="Main navigation">
             <p className="paragraph-body-xs text-text/50 mb-6" id="menu-label">
               {t('menu')}

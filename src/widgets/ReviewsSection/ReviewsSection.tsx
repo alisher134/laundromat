@@ -26,7 +26,7 @@ export const ReviewsSection = () => {
   }));
 
   return (
-    <section className="container-responsive section-spacing-top-md pb-[52px] xl:flex xl:items-start xl:justify-between">
+    <section className="container-responsive section-spacing-top xl:flex xl:items-start xl:justify-between">
       <div className="w-full xl:w-auto xl:min-w-[424px] 2xl:max-w-[596px] 2xl:min-w-[596px]">
         <h2 className="heading-section w-full md:max-w-[300px] xl:max-w-[300px] 2xl:max-w-[396px]">
           {t.rich('title', {

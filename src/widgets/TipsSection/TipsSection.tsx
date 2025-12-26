@@ -41,7 +41,7 @@ export const TipsSection = () => {
   }));
 
   return (
-    <section className="container-responsive section-spacing-top-lg pb-[60px] md:pb-[82px] xl:pb-[100px] 2xl:pb-[93px]">
+    <section className="container-responsive mt-[120px] md:mt-[164px] md:pb-[82px] xl:mt-[200px] xl:pb-[100px] 2xl:mt-[286px] 2xl:pb-[93px]">
       <div>
         <div className="mb-[32px] flex items-center justify-between">
           <h2 className="heading-section">{t('title')}</h2>

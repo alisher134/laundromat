@@ -19,7 +19,7 @@ export const ServiceSection = () => {
   }));
 
   return (
-    <section className="section-container section-spacing-top section-spacing-bottom">
+    <section className="section-container section-spacing-bottom mt-[111px] md:mt-[170px] xl:mt-[200px] 2xl:mt-[265px]">
       <h2 className="heading-section-brand mb-8 max-w-[328px] md:max-w-[678px] xl:max-w-[678px] 2xl:max-w-[751px]">
         {t('title')}
       </h2>

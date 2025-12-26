@@ -16,7 +16,7 @@ export const FaqsSection = () => {
   }));
 
   return (
-    <section className="container-responsive section-spacing-top-sm">
+    <section className="container-responsive mt-[120px] md:mt-[164px] xl:mt-[200px]">
       <h2 className="heading-section mb-8">{t('title')}</h2>
 
       <div className="bg-text/16 hidden h-px w-full md:mb-4 md:block xl:mb-6 2xl:mb-10" />

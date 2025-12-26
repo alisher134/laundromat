@@ -32,7 +32,7 @@ export const AboutSection = () => {
   }));
 
   return (
-    <section className="mx-container-mobile xl:mx-container-tablet 2xl:mx-container-desktop pt-[94px]">
+    <section className="mx-container-mobile xl:mx-container-tablet 2xl:mx-container-desktop pt-[86px] xl:pt-[122px] 2xl:pt-[172px]">
       <div className="xl:flex xl:items-stretch xl:justify-between xl:gap-[18px]">
         <div className="w-full xl:flex xl:max-w-[574px] xl:shrink-0 xl:flex-col 2xl:max-w-[807px]">
           <div className="mb-[46px] flex items-center gap-[12px] md:mb-[64px]">

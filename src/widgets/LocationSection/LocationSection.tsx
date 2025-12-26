@@ -31,7 +31,7 @@ export const LocationSection = () => {
   };
 
   return (
-    <section className="section-spacing-top-md ml-container-mobile xl:ml-container-tablet 2xl:ml-container-desktop relative overflow-x-clip overflow-y-visible xl:pb-[300px]">
+    <section className="ml-container-mobile xl:ml-container-tablet 2xl:ml-container-desktop relative mt-[120px] overflow-x-clip overflow-y-visible md:mt-[164px] xl:mt-[200px] xl:pb-[300px] 2xl:mt-[286px]">
       <div className="pointer-events-none relative z-10">
         <h2 className="heading-section pointer-events-auto mb-8 max-w-[328px] md:mb-[46px] md:max-w-[488px] 2xl:mb-[56px] 2xl:max-w-[743px]">
           {t.rich('title', {
