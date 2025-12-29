@@ -24,7 +24,7 @@ export const HeroSection = ({ isLoaded = false }: HeroSectionProps) => {
         src="/images/hero-background.png"
       />
 
-      <div className="p-container-mobile xl:p-container-tablet 2xl:p-container-desktop relative z-10 flex h-full items-end text-white md:pb-[35px] xl:pb-[38px] 2xl:pb-[46px]">
+      <div className="p-container-mobile xl:p-container-tablet 2xl:p-container-desktop relative z-10 flex h-full items-end pb-[60px] text-white md:pb-[35px] xl:pb-[38px] 2xl:pb-[46px]">
         <div className="flex flex-col gap-8 md:w-full md:flex-row md:items-end md:justify-between">
           <h1
             className={cn(
