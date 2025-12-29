@@ -6,6 +6,7 @@ export interface FaqSection {
   position: number;
   title: string;
   content: string;
+  category?: string;
 }
 
 type FaqAccordionProps = {

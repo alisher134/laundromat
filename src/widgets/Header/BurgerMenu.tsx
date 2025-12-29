@@ -53,7 +53,7 @@ export const BurgerMenu = ({ isMainPage }: { isMainPage?: boolean }) => {
             </p>
             <ul aria-labelledby="menu-label" className="space-y-3" role="menu">
               {HEADER_NAV_LINKS.map(({ href, label }) => (
-                <li key={href} role="none">
+                <li key={label} role="none">
                   <SheetClose asChild>
                     <Link
                       className="text-text hover:text-brand active:text-brand/80 block touch-manipulation py-1 text-[28px] leading-[124%] font-normal tracking-[-0.04em] transition"

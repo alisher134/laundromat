@@ -1,18 +1,15 @@
 'use client';
 
 import { FaqAccordion } from '@/shared/ui/faq-accordion';
-import { Pagination } from '@/shared/ui/Pagination';
 import { Category } from '@/shared/ui/category';
 import { useKeenSlider } from 'keen-slider/react';
 
 import { useMemo, useState } from 'react';
 import 'keen-slider/keen-slider.min.css';
-import { ALL_FAQ_SECTIONS } from '@/pagesLayer/FaqPage/config';
+import { ALL_FAQ_SECTIONS, FAQ_CATEGORIES, FaqCategoryKey } from '@/pagesLayer/FaqPage/config';
 
 export const FaqPage = () => {
-  const [activeCategory, setActiveCategory] = useState<string>('washing');
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [totalPages] = useState<number>(10);
+  const [activeCategory, setActiveCategory] = useState<FaqCategoryKey | 'all'>('all');
 
   const [sliderRef] = useKeenSlider<HTMLDivElement>({
     loop: false,
@@ -24,22 +21,17 @@ export const FaqPage = () => {
     },
   });
 
-  const categories = useMemo(
-    () => [
-      { key: 'washing', label: 'General' },
-      { key: 'drying', label: 'Prices and payment' },
-      { key: 'stainRemoval', label: 'Location' },
-      { key: 'fabricCare', label: 'Safety and convenience' },
-    ],
-    [],
-  );
+  const categories = useMemo(() => [{ key: 'all' as const, label: 'All' }, ...FAQ_CATEGORIES], []);
 
-  const handleCategoryClick = (key: string) => {
+  const filteredSections = useMemo(() => {
+    if (activeCategory === 'all') {
+      return ALL_FAQ_SECTIONS;
+    }
+    return ALL_FAQ_SECTIONS.filter((section) => section.category === activeCategory);
+  }, [activeCategory]);
+
+  const handleCategoryClick = (key: FaqCategoryKey | 'all') => {
     setActiveCategory(key);
-  };
-
-  const onPageChange = (page: number) => {
-    setCurrentPage(page);
   };
 
   return (
@@ -81,22 +73,12 @@ export const FaqPage = () => {
       <FaqAccordion
         className="mx-auto mb-[56px] md:mb-[86px] xl:mb-[86px] xl:w-[1067px] 2xl:mb-[116px] 2xl:w-[1091px]"
         isBig
-        sections={ALL_FAQ_SECTIONS}
+        sections={filteredSections}
       />
 
-      <div className="flex flex-col items-center gap-6">
-        <Pagination
-          className="hidden md:flex"
-          current={currentPage}
-          onChange={onPageChange}
-          siblingCount={3}
-          total={totalPages}
-        />
-
-        <button className="border-text/20 text-text flex h-[70px] w-[220px] items-center justify-center rounded-[8px] border text-sm leading-[132%] font-normal tracking-[-0.01em] 2xl:h-[83px] 2xl:w-[278px]">
-          Load more
-        </button>
-      </div>
+      {filteredSections.length === 0 && (
+        <p className="text-text/60 mb-[56px] text-center text-lg">No questions found in this category.</p>
+      )}
     </div>
   );
 };
