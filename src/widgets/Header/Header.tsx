@@ -43,8 +43,9 @@ export const Header = () => {
   return (
     <header
       className={cn(
-        'px-container-mobile min-[1120px]:px-container-tablet 2xl:px-container-desktop fixed top-0 right-0 left-0 z-50 pt-4 transition-colors duration-500 min-[1366px]:pt-[11px] md:pt-[18px] 2xl:pt-[22px]',
+        'px-container-mobile min-[1120px]:px-container-tablet 2xl:px-container-desktop fixed top-0 right-0 left-0 z-50 pt-4 pb-4 transition-all duration-500 min-[1366px]:pt-[11px] min-[1366px]:pb-[11px] md:pt-[18px] md:pb-[18px] 2xl:pt-[22px] 2xl:pb-[22px]',
         isHomPage && 'hero-fade hero-fade-0',
+        shouldUseBlackText && 'bg-white/30 backdrop-blur-sm',
       )}
     >
       <div className="flex items-center justify-between">
