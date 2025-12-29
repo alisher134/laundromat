@@ -38,10 +38,10 @@ export const Preloader = ({ onComplete, className }: PreloaderProps) => {
 
   return (
     <div
-      className={cn('fixed inset-0 z-50 flex items-center justify-center bg-white', className)}
+      className={cn('pointer-events-none fixed inset-0 z-50 flex items-center justify-center bg-white', className)}
       style={{ opacity, transition: 'opacity 0.3s ease-in-out' }}
     >
-      <video autoPlay className="size-[100px]" loop muted src="/videos/preloader.mp4" />
+      <video autoPlay className="pointer-events-none size-[100px]" loop muted playsInline src="/videos/preloader.mp4" />
     </div>
   );
 };
