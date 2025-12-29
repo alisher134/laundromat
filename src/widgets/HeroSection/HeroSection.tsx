@@ -40,7 +40,7 @@ export const HeroSection = ({ isLoaded = false }: HeroSectionProps) => {
 
           <div
             className={cn(
-              'rounded-card relative h-[83px] w-full max-w-[187px] overflow-hidden bg-[#F6FBFD] md:h-[147px] md:max-w-[157px] xl:h-[147px] xl:max-w-[210px] 2xl:h-[206px] 2xl:max-w-[294px]',
+              'rounded-card relative h-[83px] w-full max-w-[187px] overflow-hidden bg-[#F6FBFD] md:h-[147px] md:max-w-[157px] lg:h-[147px] lg:max-w-[210px] xl:h-[147px] xl:max-w-[210px] 2xl:h-[206px] 2xl:max-w-[294px]',
               isLoaded && 'hero-fade hero-fade-2',
             )}
           >
