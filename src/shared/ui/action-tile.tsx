@@ -11,6 +11,7 @@ interface ActionTileProps {
   onClick?: MouseEventHandler<HTMLButtonElement>;
   size?: 'default' | 'small';
   className?: string;
+  type?: 'button' | 'submit';
 }
 
 const baseTileClasses = (size: 'default' | 'small') =>
@@ -31,6 +32,7 @@ export const ActionTile = ({
   onClick,
   size = 'default',
   className,
+  type = 'button',
 }: ActionTileProps) => {
   const content = (
     <>
@@ -64,9 +66,19 @@ export const ActionTile = ({
     );
   }
 
-  if (onClick) {
+  if (onClick || type === 'submit') {
     return (
-      <button className={cn(baseTileClasses(size), 'cursor-pointer text-left', className)} onClick={onClick} type="button">
+      <button
+        className={cn(
+          baseTileClasses(size),
+          'cursor-pointer text-left',
+          disabled && 'cursor-not-allowed opacity-60',
+          className,
+        )}
+        disabled={disabled}
+        onClick={onClick}
+        type={type}
+      >
         {content}
       </button>
     );

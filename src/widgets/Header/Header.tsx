@@ -69,7 +69,7 @@ export const Header = () => {
 
           <ul className="flex items-center gap-[28px]">
             {HEADER_NAV_LINKS.map(({ href, label }) => (
-              <li className={cn('paragraph-body-xs 2xl:text-lg', textColorClass)} key={href}>
+              <li className={cn('paragraph-body-xs 2xl:text-lg', textColorClass)} key={label}>
                 <Link href={href}>{t(label)}</Link>
               </li>
             ))}

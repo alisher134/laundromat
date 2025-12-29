@@ -8,7 +8,7 @@ interface LocalizedNavLink {
 
 export const HEADER_NAV_LINKS: LocalizedNavLink[] = [
   { href: PATHS.services, label: 'services' },
-  { href: PATHS.instructions, label: 'instructions' },
+  { href: PATHS.tips, label: 'instructions' },
   { href: PATHS.tips, label: 'laundryTips' },
   { href: PATHS.contact, label: 'contact' },
 ] as const;

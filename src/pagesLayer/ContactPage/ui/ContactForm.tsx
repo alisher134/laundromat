@@ -3,7 +3,7 @@
 import { ActionTile } from '@/shared/ui/action-tile';
 import CircleRightArrowIcon from '@/shared/assets/icons/circle-right-arrow-icon.svg';
 import { cn } from '@/shared/libs/cn';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { Link } from '@/shared/config/i18n';
 import { useTranslations } from 'next-intl';
 
@@ -12,8 +12,16 @@ export const ContactForm = () => {
 
   const t = useTranslations('contact.form');
 
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!isAgreed) return;
+
+    console.log('submitted');
+    // TODO: Add form submission logic here
+  };
+
   return (
-    <form className="flex flex-1 flex-col gap-6 md:grid md:grid-cols-2 md:gap-4 2xl:gap-6">
+    <form className="flex flex-1 flex-col gap-6 md:grid md:grid-cols-2 md:gap-4 2xl:gap-6" onSubmit={onSubmit}>
       <div>
         <label
           className="text-text/40 mb-3 block text-base leading-[132%] font-normal tracking-[-0.01em]"
@@ -25,6 +33,7 @@ export const ContactForm = () => {
           className="text-text h-[76px] w-full rounded-[12px] bg-white px-4 py-[18px] text-base leading-[132%] font-normal tracking-[-0.01em] outline-none"
           id="first-name"
           name="firstName"
+          required
           type="text"
         />
       </div>
@@ -40,6 +49,7 @@ export const ContactForm = () => {
           className="text-text/40 h-[76px] w-full rounded-[12px] bg-white px-4 py-[18px] text-base leading-[132%] font-normal tracking-[-0.01em] outline-none"
           id="last-name"
           name="lastName"
+          required
           type="text"
         />
       </div>
@@ -52,6 +62,7 @@ export const ContactForm = () => {
           className="text-text/40 h-[76px] w-full rounded-[12px] bg-white px-4 py-[18px] text-base leading-[132%] font-normal tracking-[-0.01em] outline-none"
           id="phone"
           name="phone"
+          required
           type="tel"
         />
       </div>
@@ -64,6 +75,7 @@ export const ContactForm = () => {
           className="text-text/40 h-[76px] w-full rounded-[12px] bg-white px-4 py-[18px] text-base leading-[132%] font-normal tracking-[-0.01em] outline-none"
           id="email"
           name="email"
+          required
           type="email"
         />
       </div>
@@ -120,10 +132,10 @@ export const ContactForm = () => {
       <div className="mt-2 md:col-span-2">
         <ActionTile
           className="w-[196px] md:h-[106px] md:w-[328px] xl:h-[75px] xl:w-[233px] 2xl:h-[106px] 2xl:w-[328px]"
-          disabled={true}
+          disabled={!isAgreed}
           icon={CircleRightArrowIcon}
-          onClick={() => console.log('send')}
           title={t('submit')}
+          type="submit"
         />
       </div>
     </form>
