@@ -15,7 +15,7 @@ export const HeroSection = ({ isLoaded = false }: HeroSectionProps) => {
   const isGreek = locale === 'gr';
 
   return (
-    <section className={cn('sticky top-0 h-screen w-full overflow-hidden', isLoaded && 'hero-entrance')}>
+    <section className={cn('sticky top-0 h-dvh w-full overflow-hidden', isLoaded && 'hero-entrance')}>
       <Image
         alt="Laundromat hero background"
         className="object-cover object-top"
@@ -58,8 +58,8 @@ export const HeroSection = ({ isLoaded = false }: HeroSectionProps) => {
               href="/location"
             >
               <p className="text-brand paragraph-sm-default md:font-medium 2xl:text-lg">{t('hero.locations')}</p>
-              <span className="bg-brand flex size-[18px] items-center justify-center rounded-full 2xl:size-[22px]">
-                <ArrowRightIcon aria-hidden="true" className="size-[6px] text-white 2xl:size-[7px]" />
+              <span className="bg-brand flex h-[18px] w-[18px] items-center justify-center rounded-full 2xl:h-[22px] 2xl:w-[22px]">
+                <ArrowRightIcon aria-hidden="true" className="h-[6px] w-[6px] text-white 2xl:h-[7px] 2xl:w-[7px]" />
               </span>
             </Link>
           </div>
