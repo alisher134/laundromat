@@ -89,7 +89,7 @@ export const Header = () => {
             {CONTACTS.phone}
           </a>
 
-          <div className="block md:hidden">
+          <div className="block min-[1366px]:hidden">
             <BurgerMenu isMainPage={shouldUseBlackText} />
           </div>
         </div>
