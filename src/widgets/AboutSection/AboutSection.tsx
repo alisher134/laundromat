@@ -18,7 +18,7 @@ export const AboutSection = () => {
       '(min-width: 768px)': {
         slides: { perView: 'auto', spacing: 8, origin: 0 },
       },
-      '(min-width: 1280px)': {
+      '(min-width: 1024px)': {
         slides: { perView: 'auto', spacing: 18, origin: 0 },
       },
     },
@@ -32,34 +32,34 @@ export const AboutSection = () => {
   }));
 
   return (
-    <section className="mx-container-mobile xl:mx-container-tablet 2xl:mx-container-desktop pt-[86px] xl:pt-[122px] 2xl:pt-[172px]">
-      <div className="xl:flex xl:items-stretch xl:justify-between xl:gap-[18px]">
-        <div className="w-full xl:flex xl:max-w-[574px] xl:shrink-0 xl:flex-col 2xl:max-w-[807px]">
+    <section className="mx-container-mobile lg:mx-container-tablet 2xl:mx-container-desktop pt-[86px] lg:pt-[122px] 2xl:pt-[172px]">
+      <div className="lg:flex lg:items-stretch lg:justify-between lg:gap-[18px]">
+        <div className="w-full lg:flex lg:max-w-[400px] lg:shrink-0 lg:flex-col xl:max-w-[574px] 2xl:max-w-[807px]">
           <div className="mb-[46px] flex items-center gap-[12px] md:mb-[64px]">
             <p className="paragraph-body-sm text-brand">{t('subtitle')}</p>
 
             <span className="bg-brand h-1 w-1 rounded-full" />
           </div>
 
-          <div className="mt-auto hidden xl:block">
+          <div className="mt-auto hidden lg:block">
             <SliderButtons {...sliderControls} />
           </div>
         </div>
 
-        <div className="min-w-0 xl:flex-1">
-          <h2 className="heading-section mb-8 max-w-[328px] md:mb-9 md:max-w-[667px] xl:mb-9 xl:max-w-[667px] 2xl:mb-[56px] 2xl:max-w-[938px]">
+        <div className="min-w-0 lg:flex-1">
+          <h2 className="heading-section mb-8 max-w-[328px] md:mb-9 md:max-w-[667px] lg:mb-9 lg:max-w-[500px] xl:max-w-[667px] 2xl:mb-[56px] 2xl:max-w-[938px]">
             {t.rich('description', {
               span: (chunks) => <span className="text-brand">{chunks}</span>,
             })}
           </h2>
 
-          <p className="text-text/80 mb-[86px] max-w-[327px] text-lg leading-[146%] font-normal tracking-[-0.01em] md:max-w-[366px] md:text-base xl:mb-[116px] xl:max-w-[366px] xl:text-base 2xl:mb-[215px] 2xl:max-w-[477px] 2xl:text-[21px]">
+          <p className="text-text/80 mb-[86px] max-w-[327px] text-lg leading-[146%] font-normal tracking-[-0.01em] md:max-w-[366px] md:text-base lg:mb-[116px] lg:max-w-[366px] lg:text-base 2xl:mb-[215px] 2xl:max-w-[477px] 2xl:text-[21px]">
             {t('cta')}
           </p>
 
-          <div className="-mx-container-mobile xl:-mx-container-tablet 2xl:-mx-container-desktop">
+          <div className="-mx-container-mobile lg:-mx-container-tablet 2xl:-mx-container-desktop">
             <div
-              className="keen-slider pl-container-mobile xl:pl-container-tablet 2xl:pl-container-desktop"
+              className="keen-slider pl-container-mobile lg:pl-container-tablet 2xl:pl-container-desktop"
               ref={sliderRef}
               style={{
                 maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 100%)',
@@ -72,7 +72,7 @@ export const AboutSection = () => {
             </div>
           </div>
 
-          <div className="xl:hidden">
+          <div className="lg:hidden">
             <div className="flex-center mt-[23px]">
               <SliderButtons {...sliderControls} />
             </div>
