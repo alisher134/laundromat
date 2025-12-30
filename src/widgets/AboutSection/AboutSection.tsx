@@ -72,7 +72,7 @@ export const AboutSection = () => {
             </div>
           </div>
 
-          <div className="md:hidden">
+          <div className="xl:hidden">
             <div className="flex-center mt-[23px]">
               <SliderButtons {...sliderControls} />
             </div>

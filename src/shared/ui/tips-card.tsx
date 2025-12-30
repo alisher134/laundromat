@@ -22,13 +22,13 @@ export const TipsCard = ({ item, className }: TipsCardProps) => {
   return (
     <article
       className={cn(
-        'rounded-[12px] bg-white/80 backdrop-blur-[30px] backdrop-filter xl:h-[278px] 2xl:h-[390px] 2xl:rounded-[16px]',
+        'rounded-[12px] bg-white/80 backdrop-blur-[30px] backdrop-filter lg:h-[278px] 2xl:h-[390px] 2xl:rounded-[16px]',
         className,
-        item.bigImage && 'p-0 xl:h-[576px] 2xl:h-[796px]',
+        item.bigImage && 'p-0 lg:h-[576px] 2xl:h-[796px]',
       )}
     >
       {item.bigImage && (
-        <div className="relative h-[277px] w-full xl:mb-[40px] 2xl:mb-[48px] 2xl:h-[390px]">
+        <div className="relative h-[277px] w-full lg:mb-[40px] 2xl:mb-[48px] 2xl:h-[390px]">
           <Image
             alt={item.title}
             className="rounded-t-[12px] object-cover object-top 2xl:rounded-t-[16px]"
@@ -41,7 +41,7 @@ export const TipsCard = ({ item, className }: TipsCardProps) => {
       <div
         className={cn(
           'flex items-start justify-between px-6 2xl:px-8',
-          item.bigImage ? 'mb-[80px] 2xl:mb-[120px]' : 'pt-6 xl:mb-[7px] 2xl:mb-[23px] 2xl:pt-8',
+          item.bigImage ? 'mb-[80px] 2xl:mb-[120px]' : 'pt-6 lg:mb-[7px] 2xl:mb-[23px] 2xl:pt-8',
         )}
       >
         <div className="border-brand/40 text-brand rounded-[9px] border px-[13px] py-[9px] text-xs leading-[132%] font-normal tracking-[-0.01em] 2xl:rounded-[10px] 2xl:px-[18px] 2xl:py-[10px] 2xl:text-sm">
@@ -49,7 +49,7 @@ export const TipsCard = ({ item, className }: TipsCardProps) => {
         </div>
 
         {item.image && (
-          <div className="relative h-[87px] md:h-[99px] md:w-[149px] xl:h-[127px] xl:w-[186px] 2xl:h-[177px] 2xl:w-[258px]">
+          <div className="relative h-[87px] md:h-[99px] md:w-[149px] lg:h-[127px] lg:w-[186px] 2xl:h-[177px] 2xl:w-[258px]">
             <Image
               alt={item.title}
               className="rounded-[6px] object-cover"
@@ -63,7 +63,7 @@ export const TipsCard = ({ item, className }: TipsCardProps) => {
 
       <Link
         className={cn(
-          'text-text hover:text-brand block cursor-pointer pl-6 text-lg leading-[132%] font-normal tracking-[-0.01em] transition-colors md:max-w-[390px] xl:mb-4 2xl:mb-[3px] 2xl:max-w-[515px] 2xl:text-[24px] 2xl:leading-[136%] 2xl:tracking-[-0.02em]',
+          'text-text hover:text-brand block cursor-pointer pl-6 text-lg leading-[132%] font-normal tracking-[-0.01em] transition-colors md:max-w-[390px] lg:mb-4 2xl:mb-[3px] 2xl:max-w-[515px] 2xl:text-[24px] 2xl:leading-[136%] 2xl:tracking-[-0.02em]',
           item.bigImage && '2xl:max-w-[560px]',
         )}
         href={`/tips/${item.key || item.title}`}

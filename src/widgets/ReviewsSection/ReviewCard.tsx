@@ -41,7 +41,7 @@ export const ReviewCard = ({ item, className }: ReviewCardProps) => {
           {item.name}
         </h4>
 
-        <p className="text-text mt-5 mb-[26px] max-w-[348px] text-sm leading-[146%] font-normal tracking-[-0.01em] 2xl:mb-9 2xl:max-w-[489px] 2xl:text-lg">
+        <p className="text-text mt-5 mb-[26px] max-w-full text-sm leading-[146%] font-normal tracking-[-0.01em] lg:max-w-[280px] xl:max-w-[348px] 2xl:mb-9 2xl:max-w-[489px] 2xl:text-lg">
           {item.review}
         </p>
 

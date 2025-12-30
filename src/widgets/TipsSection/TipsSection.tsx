@@ -49,7 +49,7 @@ export const TipsSection = () => {
           <SliderButtons className="md:hidden" {...sliderControls} />
         </div>
 
-        <div className="-mx-container-mobile xl:hidden">
+        <div className="-mx-container-mobile lg:hidden">
           <div className="keen-slider pl-container-mobile" ref={sliderRef}>
             {tipsSlides.map((item) => (
               <TipsSlide className="keen-slider__slide" item={item} key={item.key} />
@@ -57,9 +57,9 @@ export const TipsSection = () => {
           </div>
         </div>
 
-        <div className="hidden xl:grid xl:grid-cols-2 xl:gap-5 2xl:gap-4">
+        <div className="hidden lg:grid lg:grid-cols-2 lg:gap-5 2xl:gap-4">
           {tipsCards.map((item) => (
-            <TipsCard className={cn(item.bigImage && 'xl:row-span-2')} item={item} key={item.key} />
+            <TipsCard className={cn(item.bigImage && 'lg:row-span-2')} item={item} key={item.key} />
           ))}
         </div>
       </div>
