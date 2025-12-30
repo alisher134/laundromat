@@ -21,7 +21,7 @@ export const FaqsSection = () => {
 
       <div className="bg-text/16 hidden h-px w-full md:mb-4 md:block xl:mb-6 2xl:mb-10" />
 
-      <div className="w-full xl:flex xl:flex-row-reverse xl:items-start xl:justify-between">
+      <div className="w-full lg:flex lg:flex-row-reverse lg:items-start lg:justify-between lg:gap-8">
         <FaqAccordion sections={sections} />
 
         <ActionTile href="/faq" icon={CircleRightArrowIcon} size="small" title={t('allQuestions')} />
