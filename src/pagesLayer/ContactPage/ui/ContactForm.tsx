@@ -46,7 +46,7 @@ export const ContactForm = () => {
           {t('lastName')}
         </label>
         <input
-          className="text-text/40 h-[76px] w-full rounded-[12px] bg-white px-4 py-[18px] text-base leading-[132%] font-normal tracking-[-0.01em] outline-none"
+          className="text-text h-[76px] w-full rounded-[12px] bg-white px-4 py-[18px] text-base leading-[132%] font-normal tracking-[-0.01em] outline-none"
           id="last-name"
           name="lastName"
           required
@@ -59,7 +59,7 @@ export const ContactForm = () => {
           {t('phone')}
         </label>
         <input
-          className="text-text/40 h-[76px] w-full rounded-[12px] bg-white px-4 py-[18px] text-base leading-[132%] font-normal tracking-[-0.01em] outline-none"
+          className="text-text h-[76px] w-full rounded-[12px] bg-white px-4 py-[18px] text-base leading-[132%] font-normal tracking-[-0.01em] outline-none"
           id="phone"
           name="phone"
           required
@@ -72,7 +72,7 @@ export const ContactForm = () => {
           {t('email')}
         </label>
         <input
-          className="text-text/40 h-[76px] w-full rounded-[12px] bg-white px-4 py-[18px] text-base leading-[132%] font-normal tracking-[-0.01em] outline-none"
+          className="text-text h-[76px] w-full rounded-[12px] bg-white px-4 py-[18px] text-base leading-[132%] font-normal tracking-[-0.01em] outline-none"
           id="email"
           name="email"
           required
@@ -88,7 +88,7 @@ export const ContactForm = () => {
           {t('message')}
         </label>
         <textarea
-          className="text-text/40 h-[214px] w-full resize-none rounded-[12px] bg-white px-4 py-[18px] text-base leading-[132%] font-normal tracking-[-0.01em] outline-none"
+          className="text-text h-[214px] w-full resize-none rounded-[12px] bg-white px-4 py-[18px] text-base leading-[132%] font-normal tracking-[-0.01em] outline-none"
           id="message"
           name="message"
         />
