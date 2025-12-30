@@ -34,11 +34,11 @@ export const ServiceMobile = ({ item, className }: ServiceMobileProps) => {
           {item.description}
         </p>
 
-        <div className="mb-8 flex flex-col md:flex-row md:justify-between">
+        <div className="mb-8 flex flex-col gap-4 md:flex-row md:justify-between">
           <div className="flex items-center gap-7">
             <div>
               <p className="price-label">{t('priceFrom')}</p>
-              <p className="text-text mb-3 text-2xl leading-[132%] font-normal tracking-[-0.02em] md:text-[28px] 2xl:text-[36px]">
+              <p className="text-text text-2xl leading-[132%] font-normal tracking-[-0.02em] md:text-[28px] 2xl:text-[36px]">
                 {item.price} $
               </p>
             </div>
@@ -47,7 +47,7 @@ export const ServiceMobile = ({ item, className }: ServiceMobileProps) => {
 
             <div>
               <p className="price-label">{t('timeFrom')}</p>
-              <p className="text-text mb-3 text-2xl leading-[132%] font-normal tracking-[-0.02em] md:text-[28px] 2xl:text-[36px]">
+              <p className="text-text text-2xl leading-[132%] font-normal tracking-[-0.02em] md:text-[28px] 2xl:text-[36px]">
                 {item.duration}
               </p>
             </div>

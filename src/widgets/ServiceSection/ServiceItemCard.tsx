@@ -65,7 +65,7 @@ export const ServiceItemCard = ({ item, isFirst, isLast, className }: ServiceIte
         <div
           className={cn(
             'relative lg:h-[280px] lg:w-[350px] xl:h-[390px] xl:w-[475px] 2xl:h-[520px] 2xl:w-[720px]',
-            isFirst && 'lg:h-[450px] lg:w-full xl:h-[580px] xl:w-full 2xl:h-[790px] 2xl:w-[1120px]',
+            isFirst && 'lg:h-[508px] lg:w-full xl:h-[580px] xl:w-full 2xl:h-[790px] 2xl:w-[1120px]',
           )}
         >
           <Image alt={`${item.title} service`} className="rounded-card object-cover" fill priority src={item.image} />
