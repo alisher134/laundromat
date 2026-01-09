@@ -4,6 +4,7 @@ import ArrowRightIcon from '@/shared/assets/icons/chevron-right-icon.svg';
 import { Link } from '@/shared/config/i18n';
 import { cn } from '@/shared/libs/cn';
 import { useTranslations, useLocale } from 'next-intl';
+import { useState, useEffect } from 'react';
 
 interface HeroSectionProps {
   isLoaded?: boolean;
@@ -14,8 +15,16 @@ export const HeroSection = ({ isLoaded = false }: HeroSectionProps) => {
   const locale = useLocale();
   const isGreek = locale === 'gr';
 
+  const [shouldAnimate, setShouldAnimate] = useState(false);
+
+  useEffect(() => {
+    if (isLoaded && typeof window !== 'undefined' && window.scrollY < 50) {
+      setShouldAnimate(true);
+    }
+  }, [isLoaded]);
+
   return (
-    <section className={cn('sticky top-0 h-dvh w-full overflow-hidden', isLoaded && 'hero-entrance')}>
+    <section className={cn('sticky top-0 h-dvh w-full overflow-hidden', shouldAnimate && 'hero-entrance')}>
       <Image
         alt="Laundromat hero background"
         className="object-cover object-top"
@@ -32,7 +41,7 @@ export const HeroSection = ({ isLoaded = false }: HeroSectionProps) => {
               isGreek
                 ? 'max-w-[420px] md:max-w-[700px] xl:max-w-[1000px] 2xl:max-w-[1400px]'
                 : 'max-w-[317px] md:max-w-[550px] xl:max-w-[800px] 2xl:max-w-[1126px]',
-              isLoaded && 'hero-fade hero-fade-1',
+              shouldAnimate && 'hero-fade hero-fade-1',
             )}
           >
             {t('hero.title')}
@@ -41,7 +50,7 @@ export const HeroSection = ({ isLoaded = false }: HeroSectionProps) => {
           <div
             className={cn(
               'rounded-card relative h-[83px] w-full max-w-[187px] overflow-hidden bg-[#F6FBFD] md:h-[147px] md:max-w-[157px] lg:h-[147px] lg:max-w-[210px] xl:h-[147px] xl:max-w-[210px] 2xl:h-[206px] 2xl:max-w-[294px]',
-              isLoaded && 'hero-fade hero-fade-2',
+              shouldAnimate && 'hero-fade hero-fade-2',
             )}
           >
             <Image alt="Map preview" className="md:hidden" fill sizes="187px" src="/images/mobile-map-preview.png" />

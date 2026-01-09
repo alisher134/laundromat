@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Sheet, SheetTrigger, SheetContent, SheetClose, SheetTitle } from '@/shared/ui/sheet';
 import { LanguageSwitcher } from '@/features/language-switcher';
 import { Link } from '@/shared/config/i18n';
-import BurgerMenuIcon from '@/shared/assets/icons/burger-menu-icon.svg';
+import BurgerIcon from '@/shared/assets/icons/burger-icon.svg';
 import CloseIcon from '@/shared/assets/icons/close-icon.svg';
 import { cn } from '@/shared/libs/cn';
 import { HEADER_NAV_LINKS } from '@/shared/config/navigation';
@@ -18,7 +18,7 @@ export const BurgerMenu = ({ isMainPage }: { isMainPage?: boolean }) => {
   return (
     <Sheet>
       <SheetTrigger aria-label="Open menu" className="touch-manipulation transition-transform active:scale-95">
-        <BurgerMenuIcon aria-hidden="true" className={cn('h-9 w-[38px]', textColorClass)} />
+        <BurgerIcon aria-hidden="true" className={cn('h-9 w-[38px]', textColorClass)} />
       </SheetTrigger>
 
       <SheetContent className="flex w-full flex-col overflow-hidden border-none p-0" side="right">

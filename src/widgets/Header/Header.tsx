@@ -21,8 +21,16 @@ export const Header = () => {
   const isDarkTextRoute = isRouteInList(pathname, DARK_TEXT_ROUTES);
 
   const [isScrolled, setIsScrolled] = useState(false);
+  const [shouldPlayEntrance, setShouldPlayEntrance] = useState(false);
 
   const shouldUseBlackText = isPageWithHeroBg ? isScrolled : isDarkTextRoute;
+
+  // Animation limitation on mount
+  useEffect(() => {
+    if (isHomPage && typeof window !== 'undefined' && window.scrollY < 50) {
+      setShouldPlayEntrance(true);
+    }
+  }, [isHomPage]);
 
   useEffect(() => {
     if (!isPageWithHeroBg) return;
@@ -44,7 +52,7 @@ export const Header = () => {
     <header
       className={cn(
         'px-container-mobile min-[1120px]:px-container-tablet 2xl:px-container-desktop fixed top-0 right-0 left-0 z-50 pt-4 pb-4 transition-all duration-500 min-[1366px]:pt-[11px] min-[1366px]:pb-[11px] md:pt-[18px] md:pb-[18px] 2xl:pt-[22px] 2xl:pb-[22px]',
-        isHomPage && 'hero-fade hero-fade-0',
+        shouldPlayEntrance && 'hero-fade hero-fade-0',
         shouldUseBlackText && 'bg-white/30 backdrop-blur-sm',
       )}
     >
