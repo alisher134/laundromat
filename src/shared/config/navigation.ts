@@ -8,7 +8,7 @@ interface LocalizedNavLink {
 
 export const HEADER_NAV_LINKS: LocalizedNavLink[] = [
   { href: PATHS.services, label: 'services' },
-  { href: PATHS.tips, label: 'instructions' },
+  { href: PATHS.instructions, label: 'instructions' },
   { href: PATHS.tips, label: 'laundryTips' },
   { href: PATHS.contact, label: 'contact' },
 ] as const;
@@ -20,11 +20,12 @@ export const MOBILE_NAV_LINKS = [
   { href: PATHS.faq, labelKey: 'faq', labelFallback: 'FAQ' },
 ] as const;
 
-export const DARK_TEXT_ROUTES = [PATHS.tips, PATHS.faq, PATHS.location, PATHS.services] as const;
+export const DARK_TEXT_ROUTES = [PATHS.tips, PATHS.instructions, PATHS.faq, PATHS.location, PATHS.services] as const;
 
 export const FOOTER_VISIBLE_ROUTES = [
   PATHS.home,
   PATHS.tips,
+  PATHS.instructions,
   PATHS.faq,
   PATHS.location,
   PATHS.services,

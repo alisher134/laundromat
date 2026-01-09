@@ -10,7 +10,7 @@ import { Link, usePathname } from '@/shared/config/i18n';
 import { cn } from '@/shared/libs/cn';
 import { LanguageSwitcher } from '@/features/language-switcher';
 import { DARK_TEXT_ROUTES, HEADER_NAV_LINKS, isRouteInList } from '@/shared/config/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 
 export const Header = () => {
   const t = useTranslations('common.nav');
@@ -26,8 +26,9 @@ export const Header = () => {
   const shouldUseBlackText = isPageWithHeroBg ? isScrolled : isDarkTextRoute;
 
   // Animation limitation on mount
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isHomPage && typeof window !== 'undefined' && window.scrollY < 50) {
+      // eslint-disable-next-line
       setShouldPlayEntrance(true);
     }
   }, [isHomPage]);

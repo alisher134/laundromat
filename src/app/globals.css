@@ -82,6 +82,7 @@
   }
   body {
     @apply text-foreground bg-[#C7D8E333];
+    overscroll-behavior: none;
   }
 }
 

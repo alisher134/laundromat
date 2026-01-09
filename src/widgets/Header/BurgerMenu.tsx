@@ -17,7 +17,10 @@ export const BurgerMenu = ({ isMainPage }: { isMainPage?: boolean }) => {
 
   return (
     <Sheet>
-      <SheetTrigger aria-label="Open menu" className="touch-manipulation transition-transform active:scale-95">
+      <SheetTrigger
+        aria-label="Open menu"
+        className="flex touch-manipulation items-center justify-center transition-transform active:scale-95"
+      >
         <BurgerIcon aria-hidden="true" className={cn('h-9 w-[38px]', textColorClass)} />
       </SheetTrigger>
 
