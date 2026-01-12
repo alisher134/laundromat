@@ -27,12 +27,7 @@ export const ServiceSection = () => {
       {cards.map((item, index) => (
         <div key={item.key}>
           <ServiceMobile className="block lg:hidden" item={item} />
-          <ServiceItemCard
-            className="hidden lg:block"
-            isFirst={index === 0}
-            isLast={index === cards.length - 1}
-            item={item}
-          />
+          <ServiceItemCard className="hidden lg:block" isLast={index === cards.length - 1} item={item} />
         </div>
       ))}
 

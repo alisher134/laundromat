@@ -3,9 +3,12 @@
 import { PATHS } from '@/shared/constants/paths';
 import { cn } from '@/shared/libs/cn';
 import { ActionTile } from '@/shared/ui/action-tile';
+import { useBreakpoint } from '@/shared/hooks/useBreakpoint';
 import CircleRightArrowIcon from '@/shared/assets/icons/circle-right-arrow-icon.svg';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { useRef } from 'react';
+import { useScroll, useTransform, motion, useSpring } from 'framer-motion';
 
 interface ServiceCardItem {
   key: string;
@@ -18,24 +21,64 @@ interface ServiceCardItem {
 
 interface ServiceItemCardProps {
   item: ServiceCardItem;
-  isFirst?: boolean;
   isLast?: boolean;
   className?: string;
 }
 
-export const ServiceItemCard = ({ item, isFirst, isLast, className }: ServiceItemCardProps) => {
+const CARD_SIZES = {
+  small: {
+    lg: { height: 280, width: 350 },
+    xl: { height: 390, width: 475 },
+    '2xl': { height: 520, width: 720 },
+  },
+  large: {
+    lg: { height: 508, width: 700 },
+    xl: { height: 580, width: 900 },
+    '2xl': { height: 790, width: 1120 },
+  },
+};
+
+const SPRING_CONFIG = { stiffness: 100, damping: 30, mass: 0.5 };
+const IMAGE_SIZES = '(max-width: 1280px) 700px, (max-width: 1536px) 900px, 1120px';
+
+export const ServiceItemCard = ({ item, isLast, className }: ServiceItemCardProps) => {
   const t = useTranslations('home.experience.card');
+  const cardRef = useRef<HTMLDivElement>(null);
+  const breakpoint = useBreakpoint();
+
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ['start end', 'start 0.4'],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, SPRING_CONFIG);
+  const expandProgress = useTransform(smoothProgress, [0, 1], [0, 1]);
+
+  const smallSize = CARD_SIZES.small[breakpoint];
+  const largeSize = CARD_SIZES.large[breakpoint];
+
+  const height = useTransform(expandProgress, [0, 0.9], [smallSize.height, largeSize.height]);
+  const width = useTransform(expandProgress, [0, 1], [smallSize.width, largeSize.width]);
+  const isActiveProgress = useTransform(expandProgress, [0.3, 0.5], [0, 1], { clamp: true });
+  const displayValue = useTransform(isActiveProgress, (val: number) => (val > 0 ? 'flex' : 'none'));
+  const justifyContentValue = useTransform(expandProgress, [0, 0.4], ['flex-start', 'space-start']);
+  const paddingBottomValue = useTransform(expandProgress, [0, 0.4], [12, 0]);
 
   return (
-    <div className={cn('border-t-text/16 border-t', isLast && 'border-b-text/16 border-b', className)}>
-      <div
-        className={cn(
-          'flex items-start justify-start lg:py-3 xl:py-4 2xl:py-4',
-          isFirst && 'justify-between lg:pb-0 xl:pb-0 2xl:pb-0',
-        )}
+    <div className={cn('border-t-text/16 border-t', isLast && 'border-b-text/16 border-b', className)} ref={cardRef}>
+      <motion.div
+        className="flex items-start lg:py-3 xl:py-4 2xl:py-4"
+        style={{
+          justifyContent: justifyContentValue,
+          paddingBottom: paddingBottomValue,
+        }}
+        transition={{
+          duration: 0.6,
+          ease: [0.25, 0.1, 0.25, 1],
+        }}
       >
         <div className="lg:min-w-[400px] xl:min-w-[558px] 2xl:min-w-[777px]">
-          <h3 className="text-text mb-7 max-w-[290px] text-[45px] leading-[110%] font-normal tracking-[-0.04em] lg:mt-5 xl:mt-[27px] xl:mb-[75px] 2xl:mt-10 2xl:mb-10 2xl:mb-[75px] 2xl:text-[64px]">
+          <h3 className="text-text mb-7 max-w-[290px] text-[45px] leading-[110%] font-normal tracking-[-0.04em] lg:mt-5 xl:mt-[27px] xl:mb-[75px] 2xl:mt-10 2xl:mb-[75px] 2xl:text-[64px]">
             {item.title}
           </h3>
 
@@ -45,32 +88,44 @@ export const ServiceItemCard = ({ item, isFirst, isLast, className }: ServiceIte
 
           <ActionTile href={PATHS.services} icon={CircleRightArrowIcon} title={t('learnMore')} />
 
-          {isFirst && (
-            <div className="mt-[100px] flex items-stretch gap-7 lg:mt-[100px] xl:mt-[133px] xl:h-[77px] 2xl:mt-[200px] 2xl:h-[101px] 2xl:gap-[46px]">
-              <div>
-                <p className="price-label">{t('priceFrom')}</p>
-                <p className="price-value">{item.price} $</p>
-              </div>
-
-              <div className="bg-text/16 w-px" />
-
-              <div>
-                <p className="price-label">{t('timeFrom')}</p>
-                <p className="price-value">{item.duration}</p>
-              </div>
+          <motion.div
+            className="mt-[100px] flex items-stretch gap-7 lg:mt-[100px] xl:mt-[133px] xl:h-[77px] 2xl:mt-[200px] 2xl:h-[101px] 2xl:gap-[46px]"
+            style={{
+              opacity: isActiveProgress,
+              display: displayValue,
+            }}
+          >
+            <div>
+              <p className="price-label">{t('priceFrom')}</p>
+              <p className="price-value">{item.price} $</p>
             </div>
-          )}
+
+            <div className="bg-text/16 w-px" />
+
+            <div>
+              <p className="price-label">{t('timeFrom')}</p>
+              <p className="price-value">{item.duration}</p>
+            </div>
+          </motion.div>
         </div>
 
-        <div
-          className={cn(
-            'relative lg:h-[280px] lg:w-[350px] xl:h-[390px] xl:w-[475px] 2xl:h-[520px] 2xl:w-[720px]',
-            isFirst && 'lg:h-[508px] lg:w-full xl:h-[580px] xl:w-full 2xl:h-[790px] 2xl:w-[1120px]',
-          )}
+        <motion.div
+          className="rounded-card relative overflow-hidden"
+          style={{
+            height,
+            width,
+          }}
         >
-          <Image alt={`${item.title} service`} className="rounded-card object-cover" fill priority src={item.image} />
-        </div>
-      </div>
+          <Image
+            alt={`${item.title} service`}
+            className="rounded-card object-cover"
+            fill
+            priority
+            sizes={IMAGE_SIZES}
+            src={item.image}
+          />
+        </motion.div>
+      </motion.div>
     </div>
   );
 };
