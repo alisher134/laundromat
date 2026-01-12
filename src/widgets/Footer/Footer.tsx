@@ -1,5 +1,7 @@
 'use client';
 
+import { useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { LanguageSwitcher } from '@/features/language-switcher';
 import { FOOTER_VISIBLE_ROUTES, isRouteInList } from '@/shared/config/navigation';
 import { CONTACTS } from '@/shared/constants/contacts';
@@ -10,9 +12,22 @@ import { usePathname } from '@/shared/config/i18n';
 import { PATHS } from '@/shared/constants/paths';
 import { FooterNav } from './FooterNav';
 
+const SPRING_CONFIG = { stiffness: 80, damping: 25, mass: 0.8 };
+
 export const Footer = () => {
   const t = useTranslations('common.footer');
   const pathname = usePathname();
+  const formRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: formRef,
+    offset: ['start end', 'end end'],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, SPRING_CONFIG);
+  const formWidth = useTransform(smoothProgress, [0, 1], ['60%', '100%']);
+  // Нижний блок начинает анимацию когда инпут на 80% готов (0.8), заканчивает на 100% (1)
+  const bottomBlockScale = useTransform(smoothProgress, [0.8, 1], [0.85, 1]);
 
   const shouldShowFooter = isRouteInList(pathname, FOOTER_VISIBLE_ROUTES);
 
@@ -21,7 +36,8 @@ export const Footer = () => {
   }
 
   return (
-    <footer className="xl:mx-container-tablet xl:mb-container-tablet 2xl:mx-container-desktop 2xl:mb-container-desktop mx-[6px] mt-[120px] mb-[6px] md:mt-[164px] xl:mt-[200px] 2xl:mt-[256px]">
+    <footer className="xl:px-container-tablet xl:pb-container-tablet 2xl:px-container-desktop 2xl:pb-container-desktop relative bg-white px-[6px] pt-[120px] pb-[6px] md:pt-[164px] xl:pt-[200px] 2xl:pt-[256px]">
+      <div className="pointer-events-none absolute inset-0 bg-[#C7D8E3]/20" />
       <div className="bg-brand px-container-mobile pb-container-mobile xl:px-container-tablet relative overflow-hidden rounded-[20px] pt-9 xl:py-[34px]">
         <div className="mb-[32px] flex items-start justify-between xl:mb-[83px] 2xl:mb-[180px]">
           <address className="flex flex-col items-start gap-[6px] not-italic xl:gap-[8px] 2xl:gap-[10px]">
@@ -52,32 +68,38 @@ export const Footer = () => {
           <LanguageSwitcher variant="footer" />
         </div>
 
-        <form
-          className="rounded-card flex items-center justify-between border border-white/20 py-[10px] pr-[10px] pl-[21px] md:w-[316px] xl:w-[332px] 2xl:w-[467px] 2xl:py-[14px] 2xl:pr-[14px] 2xl:pl-[26px]"
-          role="search"
-        >
-          <label className="sr-only" htmlFor="newsletter-email">
-            {t('subscribePlaceholder')}
-          </label>
-          <input
-            className="paragraph-sm-default w-full text-white outline-none xl:text-base 2xl:text-lg"
-            id="newsletter-email"
-            placeholder={t('subscribePlaceholder')}
-            type="email"
-          />
-
-          <button
-            className="flex-center rounded-badge focus-brand h-[34px] w-[34px] bg-white 2xl:h-[48px] 2xl:w-[48px]"
-            type="submit"
+        <div className="md:w-[316px] xl:w-[332px] 2xl:w-[467px]" ref={formRef}>
+          <motion.form
+            className="rounded-card flex items-center justify-between border border-white/20 py-[10px] pr-[10px] pl-[21px] 2xl:py-[14px] 2xl:pr-[14px] 2xl:pl-[26px]"
+            role="search"
+            style={{ width: formWidth }}
           >
-            <ArrowRightIcon aria-hidden="true" className="text-brand h-[7px] w-[7px]" />
-          </button>
-        </form>
+            <label className="sr-only" htmlFor="newsletter-email">
+              {t('subscribePlaceholder')}
+            </label>
+            <input
+              className="paragraph-sm-default w-full text-white outline-none xl:text-base 2xl:text-lg"
+              id="newsletter-email"
+              placeholder={t('subscribePlaceholder')}
+              type="email"
+            />
+
+            <button
+              className="flex-center rounded-badge focus-brand h-[34px] w-[34px] shrink-0 bg-white 2xl:h-[48px] 2xl:w-[48px]"
+              type="submit"
+            >
+              <ArrowRightIcon aria-hidden="true" className="text-brand h-[7px] w-[7px]" />
+            </button>
+          </motion.form>
+        </div>
         <span aria-hidden className="footer-circle-1" />
         <span aria-hidden className="footer-circle-2" />
       </div>
 
-      <div className="mx-container-mobile bg-brand-light/71 xl:px-container-tablet rounded-b-[16px] px-4 pt-6 pb-5 xl:pt-[60px] xl:pb-[20px] 2xl:mx-[40px]">
+      <motion.div
+        className="mx-container-mobile xl:px-container-tablet origin-top rounded-b-[16px] bg-[#b0d4eb] px-4 pt-6 pb-5 xl:pt-[60px] xl:pb-[20px] 2xl:mx-[40px]"
+        style={{ scaleX: bottomBlockScale }}
+      >
         <Link
           className="mb-5 inline-block text-[12px] leading-[132%] font-normal tracking-[-0.01em] text-white/60 md:hidden"
           href={PATHS.privacyPolicy}
@@ -101,7 +123,7 @@ export const Footer = () => {
             {t('websiteBy')} <span className="font-medium text-white">AVA Digital</span>
           </p>
         </div>
-      </div>
+      </motion.div>
     </footer>
   );
 };
