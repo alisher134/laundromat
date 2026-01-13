@@ -1,5 +1,7 @@
 'use client';
 
+import { useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useSlider } from '@/shared/hooks/useSlider';
 import Image from 'next/image';
 
@@ -13,11 +15,22 @@ import { ReviewCard } from './ReviewCard';
 import 'keen-slider/keen-slider.min.css';
 import { useTranslations } from 'next-intl';
 
+const SPRING_CONFIG = { stiffness: 80, damping: 25, mass: 0.8 };
+
 export const ReviewsSection = () => {
   const t = useTranslations('home.reviews');
+  const reviewsGridRef = useRef<HTMLDivElement>(null);
   const slider = useSlider({
     slides: { perView: 'auto', spacing: 8, origin: 0 },
   });
+
+  const { scrollYProgress } = useScroll({
+    target: reviewsGridRef,
+    offset: ['start end', 'end end'],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, SPRING_CONFIG);
+  const gridY = useTransform(smoothProgress, [0, 1], [250, 0]);
 
   const reviews = REVIEWS_DATA.map((item) => ({
     ...item,
@@ -92,11 +105,11 @@ export const ReviewsSection = () => {
         </div>
       </div>
 
-      <div className="hidden lg:grid lg:grid-cols-1 lg:gap-4">
+      <motion.div className="hidden lg:grid lg:grid-cols-1 lg:gap-4" ref={reviewsGridRef} style={{ y: gridY }}>
         {reviews.map((item) => (
           <ReviewCard item={item} key={item.key} />
         ))}
-      </div>
+      </motion.div>
 
       <ActionTile className="mt-9 lg:hidden" icon={CircleRightArrowIcon} size="small" title={t('allReviews')} />
     </section>
