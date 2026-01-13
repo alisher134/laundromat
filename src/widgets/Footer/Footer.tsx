@@ -53,7 +53,6 @@ const FooterCopyright = () => {
   );
 };
 
-// Separate component that uses useScroll - only rendered when footer is visible
 const AnimatedFooterContent = () => {
   const t = useTranslations('common.footer');
   const ref = useRef<HTMLDivElement>(null);
@@ -130,7 +129,6 @@ const AnimatedFooterContent = () => {
   );
 };
 
-// Main Footer component - checks visibility before rendering animated content
 export const Footer = () => {
   const pathname = usePathname();
   const shouldShowFooter = isRouteInList(pathname, FOOTER_VISIBLE_ROUTES);

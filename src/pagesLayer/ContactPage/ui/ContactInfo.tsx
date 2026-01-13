@@ -2,11 +2,9 @@
 
 import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring, useInView } from 'framer-motion';
+import { motion, useInView, type Variants } from 'framer-motion';
 
-const SPRING_CONFIG = { stiffness: 80, damping: 25, mass: 0.8 };
-
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -17,9 +15,9 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
-  hidden: { 
-    opacity: 0, 
+const itemVariants: Variants = {
+  hidden: {
+    opacity: 0,
     x: -50,
     scale: 0.9,
   },
@@ -35,9 +33,9 @@ const itemVariants = {
   },
 };
 
-const titleVariants = {
-  hidden: { 
-    opacity: 0, 
+const titleVariants: Variants = {
+  hidden: {
+    opacity: 0,
     x: -30,
   },
   visible: {

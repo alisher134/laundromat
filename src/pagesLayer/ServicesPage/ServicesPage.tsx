@@ -13,7 +13,59 @@ import { ServicesCard } from './ServicesCard';
 import { useTranslations } from 'next-intl';
 import { SERVICE_KEYS, SERVICES_DATA } from '@/pagesLayer/ServicesPage/config';
 import { FAQ_KEYS } from '@/widgets/FaqsSection/config';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, type Variants } from 'framer-motion';
+
+const fadeInUpVariants: Variants = {
+  hidden: { opacity: 0, y: 100 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+      damping: 20,
+    },
+  },
+};
+
+const fadeInUpSmallVariants: Variants = {
+  hidden: { opacity: 0, y: 80 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+      damping: 20,
+    },
+  },
+};
+
+const fadeInUpMediumVariants: Variants = {
+  hidden: { opacity: 0, y: 150 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+      damping: 20,
+    },
+  },
+};
+
+const fadeInUpLargeVariants: Variants = {
+  hidden: { opacity: 0, y: 200 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+      damping: 20,
+    },
+  },
+};
 
 export const ServicesPage = () => {
   const [activeCategory, setActiveCategory] = useState<string>(DEFAULT_SERVICE_CATEGORY);
@@ -23,66 +75,11 @@ export const ServicesPage = () => {
   const t = useTranslations('services');
   const tFaq = useTranslations('faq');
 
-  // Refs for scroll animations
   const titleRef = useRef<HTMLHeadingElement>(null);
   const categoriesRef = useRef<HTMLDivElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
   const faqRef = useRef<HTMLDivElement>(null);
 
-  // Animation variants
-  const fadeInUpVariants = {
-    hidden: { opacity: 0, y: 100 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: 'spring',
-        stiffness: 100,
-        damping: 20,
-      },
-    },
-  };
-
-  const fadeInUpSmallVariants = {
-    hidden: { opacity: 0, y: 80 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: 'spring',
-        stiffness: 100,
-        damping: 20,
-      },
-    },
-  };
-
-  const fadeInUpMediumVariants = {
-    hidden: { opacity: 0, y: 150 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: 'spring',
-        stiffness: 100,
-        damping: 20,
-      },
-    },
-  };
-
-  const fadeInUpLargeVariants = {
-    hidden: { opacity: 0, y: 200 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: 'spring',
-        stiffness: 100,
-        damping: 20,
-      },
-    },
-  };
-
-  // Check if elements are in view
   const titleInView = useInView(titleRef, { once: true, margin: '-100px' });
   const categoriesInView = useInView(categoriesRef, { once: true, margin: '-100px' });
   const servicesInView = useInView(servicesRef, { once: true, margin: '-100px' });
