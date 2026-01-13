@@ -38,7 +38,7 @@ const CARD_SIZES = {
   },
 };
 
-const SPRING_CONFIG = { stiffness: 100, damping: 30, mass: 0.5 };
+const SPRING_CONFIG = { stiffness: 35, damping: 18, mass: 1.3 };
 const IMAGE_SIZES = '(max-width: 1280px) 700px, (max-width: 1536px) 900px, 1120px';
 
 export const ServiceItemCard = ({ item, isLast, className }: ServiceItemCardProps) => {
@@ -48,21 +48,21 @@ export const ServiceItemCard = ({ item, isLast, className }: ServiceItemCardProp
 
   const { scrollYProgress } = useScroll({
     target: cardRef,
-    offset: ['start end', 'start 0.4'],
+    offset: ['center end', 'center center'],
   });
 
   const smoothProgress = useSpring(scrollYProgress, SPRING_CONFIG);
-  const expandProgress = useTransform(smoothProgress, [0, 1], [0, 1]);
+  const expandProgress = useTransform(smoothProgress, [0, 0.8], [0, 1]);
 
   const smallSize = CARD_SIZES.small[breakpoint];
   const largeSize = CARD_SIZES.large[breakpoint];
 
   const height = useTransform(expandProgress, [0, 0.9], [smallSize.height, largeSize.height]);
   const width = useTransform(expandProgress, [0, 1], [smallSize.width, largeSize.width]);
-  const isActiveProgress = useTransform(expandProgress, [0.3, 0.5], [0, 1], { clamp: true });
+  const isActiveProgress = useTransform(expandProgress, [0, 0.4], [0, 1], { clamp: true });
   const displayValue = useTransform(isActiveProgress, (val: number) => (val > 0 ? 'flex' : 'none'));
-  const justifyContentValue = useTransform(expandProgress, [0, 0.4], ['flex-start', 'space-start']);
-  const paddingBottomValue = useTransform(expandProgress, [0, 0.4], [12, 0]);
+  const justifyContentValue = useTransform(expandProgress, [0, 0.3], ['flex-start', '']);
+  const paddingBottomValue = useTransform(expandProgress, [0, 0.3], [12, 0]);
 
   return (
     <div className={cn('border-t-text/16 border-t', isLast && 'border-b-text/16 border-b', className)} ref={cardRef}>
