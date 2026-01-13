@@ -1,7 +1,13 @@
+'use client';
+
+import { useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import Image from 'next/image';
 import ArrowDownIcon from '@/shared/assets/icons/arrow-down-icon.svg';
 import { cn } from '@/shared/libs/cn';
-import Image from 'next/image';
 import { Link } from '@/shared/config/i18n';
+
+const SPRING_CONFIG = { stiffness: 80, damping: 25, mass: 0.8 };
 
 interface TipCardItem {
   key?: string;
@@ -18,7 +24,16 @@ interface TipsCardProps {
 }
 
 export const TipsCard = ({ item, className }: TipsCardProps) => {
-  console.log(item);
+  const cardRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ['start end', 'end end'],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, SPRING_CONFIG);
+  const imageScale = useTransform(smoothProgress, [0, 1], [0.8, 1]);
+
   return (
     <article
       className={cn(
@@ -26,22 +41,26 @@ export const TipsCard = ({ item, className }: TipsCardProps) => {
         className,
         item.bigImage && 'p-0 lg:h-[576px] 2xl:h-[796px]',
       )}
+      ref={cardRef}
     >
       {item.bigImage && (
-        <div className="relative h-[277px] w-full lg:mb-[40px] 2xl:mb-[48px] 2xl:h-[390px]">
+        <motion.div
+          className="relative h-[277px] w-full origin-top-left lg:mb-10 2xl:mb-12 2xl:h-[390px]"
+          style={{ scale: imageScale }}
+        >
           <Image
             alt={item.title}
             className="rounded-t-[12px] object-cover object-top 2xl:rounded-t-[16px]"
             fill
             src={item.bigImage}
           />
-        </div>
+        </motion.div>
       )}
 
       <div
         className={cn(
           'flex items-start justify-between px-6 2xl:px-8',
-          item.bigImage ? 'mb-[80px] 2xl:mb-[120px]' : 'pt-6 lg:mb-[7px] 2xl:mb-[23px] 2xl:pt-8',
+          item.bigImage ? 'mb-20 2xl:mb-[120px]' : 'pt-6 lg:mb-[7px] 2xl:mb-[23px] 2xl:pt-8',
         )}
       >
         <div className="border-brand/40 text-brand rounded-[9px] border px-[13px] py-[9px] text-xs leading-[132%] font-normal tracking-[-0.01em] 2xl:rounded-[10px] 2xl:px-[18px] 2xl:py-[10px] 2xl:text-sm">
@@ -49,7 +68,10 @@ export const TipsCard = ({ item, className }: TipsCardProps) => {
         </div>
 
         {item.image && (
-          <div className="relative h-[87px] md:h-[99px] md:w-[149px] lg:h-[127px] lg:w-[186px] 2xl:h-[177px] 2xl:w-[258px]">
+          <motion.div
+            className="relative h-[87px] origin-top-left md:h-[99px] md:w-[149px] lg:h-[127px] lg:w-[186px] 2xl:h-[177px] 2xl:w-[258px]"
+            style={{ scale: imageScale }}
+          >
             <Image
               alt={item.title}
               className="rounded-[6px] object-cover"
@@ -57,13 +79,13 @@ export const TipsCard = ({ item, className }: TipsCardProps) => {
               sizes="(max-width: 768px) 145px, 99px"
               src={item.image}
             />
-          </div>
+          </motion.div>
         )}
       </div>
 
       <Link
         className={cn(
-          'text-text hover:text-brand block cursor-pointer pl-6 text-lg leading-[132%] font-normal tracking-[-0.01em] transition-colors md:max-w-[390px] lg:mb-4 2xl:mb-[3px] 2xl:max-w-[515px] 2xl:text-[24px] 2xl:leading-[136%] 2xl:tracking-[-0.02em]',
+          'text-text hover:text-brand block cursor-pointer pl-6 text-lg leading-[132%] font-normal tracking-[-0.01em] transition-colors md:max-w-[390px] lg:mb-4 2xl:mb-[3px] 2xl:max-w-[515px] 2xl:text-2xl 2xl:leading-[136%] 2xl:tracking-[-0.02em]',
           item.bigImage && '2xl:max-w-[560px]',
         )}
         href={`/tips/${item.key || item.title}`}

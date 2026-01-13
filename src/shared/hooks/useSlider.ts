@@ -26,6 +26,13 @@ export const useSlider = (config: KeenSliderOptions = {}): UseSliderReturn => {
         perView: 'auto',
         spacing: 8,
       },
+      drag: {
+        rubberband: true,
+      },
+      defaultAnimation: {
+        duration: 800,
+        easing: (t: number) => 1 - Math.pow(1 - t, 4), // easeOutQuart
+      },
       ...config,
       created(slider) {
         setTotalSlides(slider.track.details.slides.length);
