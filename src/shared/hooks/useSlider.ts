@@ -12,41 +12,46 @@ export interface UseSliderReturn {
   isLastSlide: boolean;
 }
 
+const DEFAULT_ANIMATION = {
+  duration: 900,
+  easing: (t: number) => 1 - Math.pow(1 - t, 3),
+};
+
 export const useSlider = (config: KeenSliderOptions = {}): UseSliderReturn => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [totalSlides, setTotalSlides] = useState(0);
   const [maxIdx, setMaxIdx] = useState(0);
 
-  const sliderConfig: KeenSliderOptions = useMemo(
-    () => ({
+  const sliderConfig: KeenSliderOptions = useMemo(() => {
+    const { created, slideChanged, slides, defaultAnimation, ...restConfig } = config;
+
+    return {
       loop: false,
       mode: 'free-snap',
       rtl: false,
+      rubberband: true,
+      ...restConfig,
       slides: {
         perView: 'auto',
         spacing: 8,
-      },
-      drag: {
-        rubberband: true,
+        ...(typeof slides === 'object' ? slides : {}),
       },
       defaultAnimation: {
-        duration: 800,
-        easing: (t: number) => 1 - Math.pow(1 - t, 4), // easeOutQuart
+        ...DEFAULT_ANIMATION,
+        ...(defaultAnimation || {}),
       },
-      ...config,
       created(slider) {
         setTotalSlides(slider.track.details.slides.length);
         setMaxIdx(slider.track.details.maxIdx);
-        config.created?.(slider);
+        created?.(slider);
       },
       slideChanged(slider) {
         setCurrentSlide(slider.track.details.rel);
         setMaxIdx(slider.track.details.maxIdx);
-        config.slideChanged?.(slider);
+        slideChanged?.(slider);
       },
-    }),
-    [config],
-  );
+    };
+  }, [config]);
 
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>(sliderConfig);
 
