@@ -73,7 +73,7 @@ export const InstructionsPage = () => {
 
   const [sliderRef] = useKeenSlider<HTMLDivElement>(INSTRUCTION_SLIDER_CONFIG);
 
-  const t = useTranslations('tips');
+  const t = useTranslations('instructions');
 
   const titleRef = useRef<HTMLHeadingElement>(null);
   const filtersRef = useRef<HTMLDivElement>(null);
@@ -101,12 +101,9 @@ export const InstructionsPage = () => {
     () =>
       INSTRUCTIONS_DATA.map((item) => ({
         ...item,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        category: t(`items.tip-${item.key.split('-')[1]}.category` as any),
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        title: t(`items.tip-${item.key.split('-')[1]}.title` as any),
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        date: t(`items.tip-${item.key.split('-')[1]}.date` as any),
+        category: t(`items.${item.key}.category`),
+        title: t(`items.${item.key}.title`),
+        date: t(`items.${item.key}.date`),
       })),
     [t],
   );
@@ -148,21 +145,21 @@ export const InstructionsPage = () => {
   return (
     <div className="mx-4 pt-[124px] md:mx-4 md:pt-[136px] xl:pt-[147px] 2xl:pt-[208px]">
       <motion.h1
-        ref={titleRef}
-        className="heading-section mb-[32px] text-left md:mb-9 xl:mb-[45px] 2xl:mb-[56px]"
-        variants={fadeInUpVariants}
-        initial="hidden"
         animate={titleInView ? 'visible' : 'hidden'}
+        className="heading-section mb-[32px] text-left md:mb-9 xl:mb-[45px] 2xl:mb-[56px]"
+        initial="hidden"
+        ref={titleRef}
+        variants={fadeInUpVariants}
       >
-        Instructions
+        {t('title')}
       </motion.h1>
 
       <motion.div
-        ref={filtersRef}
-        className="mb-[32px] flex flex-col gap-3 md:mb-9 md:flex-row md:items-center md:justify-between xl:mb-[45px] 2xl:mb-[56px]"
-        variants={fadeInUpSmallVariants}
-        initial="hidden"
         animate={filtersInView ? 'visible' : 'hidden'}
+        className="mb-[32px] flex flex-col gap-3 md:mb-9 md:flex-row md:items-center md:justify-between xl:mb-[45px] 2xl:mb-[56px]"
+        initial="hidden"
+        ref={filtersRef}
+        variants={fadeInUpSmallVariants}
       >
         <div className="-mx-container-mobile md:hidden">
           <div className="keen-slider pl-container-mobile" ref={sliderRef}>
@@ -215,11 +212,11 @@ export const InstructionsPage = () => {
       </motion.div>
 
       <motion.div
-        ref={instructionsDesktopRef}
-        className="hidden gap-4 xl:mb-[86px] xl:grid xl:grid-cols-2 xl:gap-4 xl:gap-[14px] 2xl:mb-[116px] 2xl:gap-4"
-        variants={fadeInUpMediumVariants}
-        initial="hidden"
         animate={instructionsDesktopInView ? 'visible' : 'hidden'}
+        className="hidden gap-4 xl:mb-[86px] xl:grid xl:grid-cols-2 xl:gap-4 xl:gap-[14px] 2xl:mb-[116px] 2xl:gap-4"
+        initial="hidden"
+        ref={instructionsDesktopRef}
+        variants={fadeInUpMediumVariants}
       >
         {filteredAndSortedInstructions.map((item) => (
           <TipsCard className={cn(item.bigImage && 'lg:row-span-2')} item={item} key={item.key} />
@@ -227,11 +224,11 @@ export const InstructionsPage = () => {
       </motion.div>
 
       <motion.div
-        ref={instructionsMobileRef}
-        className="mb-[46px] grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-4 xl:hidden 2xl:mb-[116px]"
-        variants={fadeInUpMediumVariants}
-        initial="hidden"
         animate={instructionsMobileInView ? 'visible' : 'hidden'}
+        className="mb-[46px] grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-4 xl:hidden 2xl:mb-[116px]"
+        initial="hidden"
+        ref={instructionsMobileRef}
+        variants={fadeInUpMediumVariants}
       >
         {filteredAndSortedInstructions.map((item) => (
           <TipsSlide className="keen-slider__slide min-w-full" item={item} key={item.key} />
@@ -239,11 +236,11 @@ export const InstructionsPage = () => {
       </motion.div>
 
       <motion.div
-        ref={paginationRef}
-        className="flex flex-col items-center gap-6"
-        variants={fadeInUpVariants}
-        initial="hidden"
         animate={paginationInView ? 'visible' : 'hidden'}
+        className="flex flex-col items-center gap-6"
+        initial="hidden"
+        ref={paginationRef}
+        variants={fadeInUpVariants}
       >
         <Pagination
           className="hidden md:flex"

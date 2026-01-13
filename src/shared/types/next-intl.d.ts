@@ -7,6 +7,7 @@ import faq from '@/shared/config/i18n/messages/en/faq.json';
 import home from '@/shared/config/i18n/messages/en/home.json';
 import services from '@/shared/config/i18n/messages/en/services.json';
 import tips from '@/shared/config/i18n/messages/en/tips.json';
+import instructions from '@/shared/config/i18n/messages/en/instructions.json';
 import error from '@/shared/config/i18n/messages/en/error.json';
 import location from '@/shared/config/i18n/messages/en/location.json';
 
@@ -23,6 +24,7 @@ declare module 'next-intl' {
     home: typeof home;
     services: typeof services;
     tips: typeof tips;
+    instructions: typeof instructions;
     error: typeof error;
     location: typeof location;
   }
