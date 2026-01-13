@@ -47,8 +47,8 @@ export const FaqAccordion = ({ sections, className, isBig }: FaqAccordionProps) 
                 </span>
               </div>
 
-              <span className="bg-brand/10 text-brand flex h-[40px] w-[40px] items-center justify-center rounded-[9px] md:size-[55px] md:rounded-[12px] xl:size-[40px] 2xl:size-[55px] 2xl:rounded-[12px]">
-                <PlusIcon className="h-[10px] w-[10px] md:h-[12px] md:w-[12px] xl:h-[10px] xl:w-[10px] 2xl:h-[12px] 2xl:w-[12px]" />
+              <span className="bg-brand/10 text-brand flex h-[40px] w-[40px] items-center justify-center rounded-[9px] transition-all duration-300 group-data-[state=open]:bg-brand/20 md:size-[55px] md:rounded-[12px] xl:size-[40px] 2xl:size-[55px] 2xl:rounded-[12px]">
+                <PlusIcon className="h-[10px] w-[10px] transition-transform duration-300 group-data-[state=open]:rotate-45 md:h-[12px] md:w-[12px] xl:h-[10px] xl:w-[10px] 2xl:h-[12px] 2xl:w-[12px]" />
               </span>
             </div>
           </AccordionTrigger>

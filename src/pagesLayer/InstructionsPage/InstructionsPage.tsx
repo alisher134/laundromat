@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useRef } from 'react';
 import { useKeenSlider } from 'keen-slider/react';
 import { Pagination } from '@/shared/ui/Pagination';
 import { Category } from '@/shared/ui/category';
@@ -20,6 +20,7 @@ import {
 } from '@/shared/data';
 import 'keen-slider/keen-slider.min.css';
 import { useTranslations } from 'next-intl';
+import { motion, useInView } from 'framer-motion';
 
 const CATEGORY_KEYS: CategoryKey[] = ['all', 'tipsAndTricks', 'usefulResources', 'companyNews'];
 
@@ -34,6 +35,60 @@ export const InstructionsPage = () => {
   const [sliderRef] = useKeenSlider<HTMLDivElement>(INSTRUCTION_SLIDER_CONFIG);
 
   const t = useTranslations('tips');
+
+  // Refs for scroll animations
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const filtersRef = useRef<HTMLDivElement>(null);
+  const instructionsDesktopRef = useRef<HTMLDivElement>(null);
+  const instructionsMobileRef = useRef<HTMLDivElement>(null);
+  const paginationRef = useRef<HTMLDivElement>(null);
+
+  // Animation variants
+  const fadeInUpVariants = {
+    hidden: { opacity: 0, y: 100 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: 'spring',
+        stiffness: 100,
+        damping: 20,
+      },
+    },
+  };
+
+  const fadeInUpSmallVariants = {
+    hidden: { opacity: 0, y: 80 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: 'spring',
+        stiffness: 100,
+        damping: 20,
+      },
+    },
+  };
+
+  const fadeInUpMediumVariants = {
+    hidden: { opacity: 0, y: 150 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: 'spring',
+        stiffness: 100,
+        damping: 20,
+      },
+    },
+  };
+
+  // Check if elements are in view
+  const titleInView = useInView(titleRef, { once: true, margin: '-100px' });
+  const filtersInView = useInView(filtersRef, { once: true, margin: '-100px' });
+  const instructionsDesktopInView = useInView(instructionsDesktopRef, { once: true, margin: '-100px' });
+  const instructionsMobileInView = useInView(instructionsMobileRef, { once: true, margin: '-100px' });
+  const paginationInView = useInView(paginationRef, { once: true, margin: '-100px' });
 
   const categories = CATEGORY_KEYS.map((key) => ({
     key,
@@ -95,9 +150,23 @@ export const InstructionsPage = () => {
 
   return (
     <div className="mx-4 pt-[124px] md:mx-4 md:pt-[136px] xl:pt-[147px] 2xl:pt-[208px]">
-      <h1 className="heading-section mb-[32px] text-left md:mb-9 xl:mb-[45px] 2xl:mb-[56px]">Instructions</h1>
+      <motion.h1
+        ref={titleRef}
+        className="heading-section mb-[32px] text-left md:mb-9 xl:mb-[45px] 2xl:mb-[56px]"
+        variants={fadeInUpVariants}
+        initial="hidden"
+        animate={titleInView ? 'visible' : 'hidden'}
+      >
+        Instructions
+      </motion.h1>
 
-      <div className="mb-[32px] flex flex-col gap-3 md:mb-9 md:flex-row md:items-center md:justify-between xl:mb-[45px] 2xl:mb-[56px]">
+      <motion.div
+        ref={filtersRef}
+        className="mb-[32px] flex flex-col gap-3 md:mb-9 md:flex-row md:items-center md:justify-between xl:mb-[45px] 2xl:mb-[56px]"
+        variants={fadeInUpSmallVariants}
+        initial="hidden"
+        animate={filtersInView ? 'visible' : 'hidden'}
+      >
         <div className="-mx-container-mobile md:hidden">
           <div className="keen-slider pl-container-mobile" ref={sliderRef}>
             {categories.map(({ key, label }) => (
@@ -146,21 +215,39 @@ export const InstructionsPage = () => {
             </SelectContent>
           </Select>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="hidden gap-4 xl:mb-[86px] xl:grid xl:grid-cols-2 xl:gap-4 xl:gap-[14px] 2xl:mb-[116px] 2xl:gap-4">
+      <motion.div
+        ref={instructionsDesktopRef}
+        className="hidden gap-4 xl:mb-[86px] xl:grid xl:grid-cols-2 xl:gap-4 xl:gap-[14px] 2xl:mb-[116px] 2xl:gap-4"
+        variants={fadeInUpMediumVariants}
+        initial="hidden"
+        animate={instructionsDesktopInView ? 'visible' : 'hidden'}
+      >
         {filteredAndSortedInstructions.map((item) => (
           <TipsCard className={cn(item.bigImage && 'lg:row-span-2')} item={item} key={item.key} />
         ))}
-      </div>
+      </motion.div>
 
-      <div className="mb-[46px] grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-4 xl:hidden 2xl:mb-[116px]">
+      <motion.div
+        ref={instructionsMobileRef}
+        className="mb-[46px] grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-4 xl:hidden 2xl:mb-[116px]"
+        variants={fadeInUpMediumVariants}
+        initial="hidden"
+        animate={instructionsMobileInView ? 'visible' : 'hidden'}
+      >
         {filteredAndSortedInstructions.map((item) => (
           <TipsSlide className="keen-slider__slide min-w-full" item={item} key={item.key} />
         ))}
-      </div>
+      </motion.div>
 
-      <div className="flex flex-col items-center gap-6">
+      <motion.div
+        ref={paginationRef}
+        className="flex flex-col items-center gap-6"
+        variants={fadeInUpVariants}
+        initial="hidden"
+        animate={paginationInView ? 'visible' : 'hidden'}
+      >
         <Pagination
           className="hidden md:flex"
           current={currentPage}
@@ -172,7 +259,7 @@ export const InstructionsPage = () => {
         <button className="border-text/20 text-text flex h-[70px] w-[220px] cursor-pointer items-center justify-center rounded-[8px] border text-sm leading-[132%] font-normal tracking-[-0.01em] 2xl:h-[83px] 2xl:w-[278px]">
           {t('loadMore')}
         </button>
-      </div>
+      </motion.div>
     </div>
   );
 };

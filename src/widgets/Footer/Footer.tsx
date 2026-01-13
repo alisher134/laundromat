@@ -13,21 +13,6 @@ import { FooterNav } from './FooterNav';
 
 const SPRING_CONFIG = { stiffness: 80, damping: 25, mass: 0.8 };
 
-const useFooterAnimation = () => {
-  const ref = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end end'],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, SPRING_CONFIG);
-  const formWidth = useTransform(smoothProgress, [0, 1], ['60%', '100%']);
-  const bottomBlockScale = useTransform(smoothProgress, [0.8, 1], [0.85, 1]);
-
-  return { ref, formWidth, bottomBlockScale };
-};
-
 const FooterContacts = () => (
   <address className="flex flex-col items-start gap-[6px] not-italic xl:gap-2 2xl:gap-[10px]">
     <a
@@ -68,16 +53,19 @@ const FooterCopyright = () => {
   );
 };
 
-export const Footer = () => {
+// Separate component that uses useScroll - only rendered when footer is visible
+const AnimatedFooterContent = () => {
   const t = useTranslations('common.footer');
-  const pathname = usePathname();
-  const { ref, formWidth, bottomBlockScale } = useFooterAnimation();
+  const ref = useRef<HTMLDivElement>(null);
 
-  const shouldShowFooter = isRouteInList(pathname, FOOTER_VISIBLE_ROUTES);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end end'],
+  });
 
-  if (!shouldShowFooter) {
-    return null;
-  }
+  const smoothProgress = useSpring(scrollYProgress, SPRING_CONFIG);
+  const formWidth = useTransform(smoothProgress, [0, 1], ['60%', '100%']);
+  const bottomBlockScale = useTransform(smoothProgress, [0.8, 1], [0.85, 1]);
 
   return (
     <footer className="xl:px-container-tablet xl:pb-container-tablet 2xl:px-container-desktop 2xl:pb-container-desktop relative bg-white px-[6px] pt-[120px] pb-[6px] md:pt-[164px] xl:pt-[200px] 2xl:pt-[256px]">
@@ -140,4 +128,16 @@ export const Footer = () => {
       </motion.div>
     </footer>
   );
+};
+
+// Main Footer component - checks visibility before rendering animated content
+export const Footer = () => {
+  const pathname = usePathname();
+  const shouldShowFooter = isRouteInList(pathname, FOOTER_VISIBLE_ROUTES);
+
+  if (!shouldShowFooter) {
+    return null;
+  }
+
+  return <AnimatedFooterContent />;
 };
