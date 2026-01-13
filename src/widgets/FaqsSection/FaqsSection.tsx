@@ -8,7 +8,7 @@ import CircleRightArrowIcon from '@/shared/assets/icons/circle-right-arrow-icon.
 import { useTranslations } from 'next-intl';
 import { FAQ_KEYS } from '@/widgets/FaqsSection/config';
 
-const SPRING_CONFIG = { stiffness: 80, damping: 25, mass: 0.8 };
+const SPRING_CONFIG = { stiffness: 35, damping: 20, mass: 1.2 };
 
 export const FaqsSection = () => {
   const t = useTranslations('faq');
@@ -16,11 +16,12 @@ export const FaqsSection = () => {
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'start 0.3'],
+    offset: ['start end', 'start 0.5'],
   });
 
   const smoothProgress = useSpring(scrollYProgress, SPRING_CONFIG);
-  const y = useTransform(smoothProgress, [0, 1], [200, 0]);
+  const y = useTransform(smoothProgress, [0, 0.7], [220, 0]);
+  const opacity = useTransform(smoothProgress, [0, 0.5], [0.3, 1]);
 
   const sections = FAQ_KEYS.map((key, index) => ({
     position: index + 1,
@@ -29,7 +30,11 @@ export const FaqsSection = () => {
   }));
 
   return (
-    <motion.section className="container-responsive mt-[120px] md:mt-[164px] xl:mt-[200px]" ref={sectionRef} style={{ y }}>
+    <motion.section
+      className="container-responsive mt-[120px] md:mt-[164px] xl:mt-[200px]"
+      ref={sectionRef}
+      style={{ y, opacity }}
+    >
       <h2 className="heading-section mb-8">{t('title')}</h2>
 
       <div className="bg-text/16 hidden h-px w-full md:mb-4 md:block xl:mb-6 2xl:mb-10" />

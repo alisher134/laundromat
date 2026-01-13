@@ -7,7 +7,7 @@ import ArrowDownIcon from '@/shared/assets/icons/arrow-down-icon.svg';
 import { cn } from '@/shared/libs/cn';
 import { Link } from '@/shared/config/i18n';
 
-const SPRING_CONFIG = { stiffness: 80, damping: 25, mass: 0.8 };
+const SPRING_CONFIG = { stiffness: 55, damping: 16, mass: 0.85 };
 
 interface TipCardItem {
   key?: string;
@@ -28,11 +28,11 @@ export const TipsCard = ({ item, className }: TipsCardProps) => {
 
   const { scrollYProgress } = useScroll({
     target: cardRef,
-    offset: ['start end', 'end end'],
+    offset: ['start end', 'start center'],
   });
 
   const smoothProgress = useSpring(scrollYProgress, SPRING_CONFIG);
-  const imageScale = useTransform(smoothProgress, [0, 1], [0.8, 1]);
+  const imageScale = useTransform(smoothProgress, [0, 0.65], [0.8, 1]);
 
   return (
     <article
