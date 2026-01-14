@@ -15,7 +15,7 @@ import { ReviewCard } from './ReviewCard';
 import 'keen-slider/keen-slider.min.css';
 import { useTranslations } from 'next-intl';
 
-const SPRING_CONFIG = { stiffness: 80, damping: 25, mass: 0.8 };
+const SPRING_CONFIG = { stiffness: 120, damping: 35, mass: 0.8 };
 
 export const ReviewsSection = () => {
   const t = useTranslations('home.reviews');
