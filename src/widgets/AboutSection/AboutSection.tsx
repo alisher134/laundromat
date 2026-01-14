@@ -22,6 +22,13 @@ export const AboutSection = () => {
         slides: { perView: 'auto', spacing: 18, origin: 0 },
       },
     },
+    defaultAnimation: {
+      duration: 1200,
+      easing: (t: number) => {
+        // Плавная ease-out кривая для более мягкой анимации
+        return 1 - Math.pow(1 - t, 4);
+      },
+    },
   });
 
   const cards = ABOUT_CARDS_DATA.map((card) => ({
