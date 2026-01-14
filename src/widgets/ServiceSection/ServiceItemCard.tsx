@@ -118,7 +118,7 @@ export const ServiceItemCard = ({ item, isLast, className }: ServiceItemCardProp
         >
           <Image
             alt={`${item.title} service`}
-            className="rounded-card object-cover"
+            className="rounded-card object-cover object-center"
             fill
             priority
             sizes={IMAGE_SIZES}

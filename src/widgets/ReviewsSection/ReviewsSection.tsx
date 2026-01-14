@@ -30,7 +30,7 @@ export const ReviewsSection = () => {
   });
 
   const smoothProgress = useSpring(scrollYProgress, SPRING_CONFIG);
-  const gridY = useTransform(smoothProgress, [0, 1], [250, 0]);
+  const gridY = useTransform(smoothProgress, [0, 1], [30, -60]);
 
   const reviews = REVIEWS_DATA.map((item) => ({
     ...item,
