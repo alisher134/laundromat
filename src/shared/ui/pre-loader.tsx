@@ -22,10 +22,10 @@ export const Preloader = ({ onComplete, className }: PreloaderProps) => {
     };
 
     if (document.readyState === 'complete') {
-      setTimeout(handleLoad, 1500);
+      setTimeout(handleLoad, 3000);
     } else {
       window.addEventListener('load', () => {
-        setTimeout(handleLoad, 1500);
+        setTimeout(handleLoad, 3000);
       });
     }
 
@@ -41,7 +41,14 @@ export const Preloader = ({ onComplete, className }: PreloaderProps) => {
       className={cn('pointer-events-none fixed inset-0 z-50 flex items-center justify-center bg-white', className)}
       style={{ opacity, transition: 'opacity 0.3s ease-in-out' }}
     >
-      <video autoPlay className="pointer-events-none size-[100px]" loop muted playsInline src="/videos/preloader.mp4" />
+      <video
+        autoPlay
+        className="pointer-events-none size-[100px]"
+        loop
+        muted
+        playsInline
+        src="/videos/preloader-speed.mp4"
+      />
     </div>
   );
 };
